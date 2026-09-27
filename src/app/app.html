@@ -1,6 +1,14 @@
-<div style="padding: 20px; font-family: Arial;">
-  <h2>Frontend v1.0</h2>
-  <input [(ngModel)]="inputText" placeholder="Введите текст" />
-  <button (click)="sendData()">Отправить</button>
-  <p>{{ status }}</p>
+<div style="padding:20px;font-family:Arial">
+  <h2>Frontend v2.0</h2>
+  <div>
+    <input [(ngModel)]="inputText" placeholder="Введите текст" />
+    <button (click)="sendData()">Отправить</button>
+    <p>{{ saveStatus }}</p>
+  </div>
+
+  <div style="margin-top:20px">
+    <button (click)="loadData()">Загрузить данные</button>
+    <br>
+    <textarea rows="6" cols="50" readonly>{{ loadDataResult }}</textarea>
+  </div>
 </div>

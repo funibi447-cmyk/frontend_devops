@@ -11,7 +11,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class App {
   inputText = '';
-  status = '';
+  saveStatus = '';
+  loadDataResult = '';
 
   constructor(private http: HttpClient) {}
 
@@ -19,8 +20,19 @@ export class App {
     this.http.post('http://localhost:5000/api/save', this.inputText,
       { responseType: 'json' })
       .subscribe({
-        next: () => this.status = 'Сохранено!',
-        error: () => this.status = 'Ошибка отправки'
+        next: () => {
+          this.saveStatus = 'Сохранено!';
+          this.inputText = '';
+        },
+        error: () => this.saveStatus = 'Ошибка отправки'
+      });
+  }
+
+  loadData() {
+    this.http.get<{ data: string }>('http://localhost:5000/api/load')
+      .subscribe({
+        next: (res) => this.loadDataResult = res.data,
+        error: () => this.loadDataResult = 'Ошибка загрузки'
       });
   }
 }
